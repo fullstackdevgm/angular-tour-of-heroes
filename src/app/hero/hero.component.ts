@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class HeroComponent implements OnInit {
 
 	hero: {
-		id: int,
+		id: any,
 		name: string,
 	} = {
 		id: 1,

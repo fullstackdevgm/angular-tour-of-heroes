@@ -7,9 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeroesComponent implements OnInit {
 
-	const heroes: {
-		id: int,
-		name: string,
+	heroes: {
+		id: any,
+		name: String,
 	}[] = [
 		{ id: 11, name: 'Mr. Nice' },
 		{ id: 12, name: 'Narco' },
