@@ -1,62 +1,4 @@
-/* DashboardComponent's private CSS styles */
-[class*='col-'] {
-  float: left;
-  padding-right: 20px;
-  padding-bottom: 20px;
-}
-[class*='col-']:last-of-type {
-  padding-right: 0;
-}
-a {
-  text-decoration: none;
-}
-h3 {
-  text-align: center;
-  margin-bottom: 0;
-}
-h4 {
-  position: relative;
-}
-.grid {
-  margin: 0;
-}
-.col-1-4 {
-  width: 25%;
-}
-.module {
-  padding: 20px;
-  text-align: center;
-  color: #eee;
-  max-height: 120px;
-  min-width: 120px;
-  background-color: #607D8B;
-  border-radius: 2px;
-}
-.module:hover {
-  background-color: #EEE;
-  cursor: pointer;
-  color: #607d8b;
-}
-.grid-pad {
-  padding: 10px 0;
-}
-.grid-pad > [class*='col-']:last-of-type {
-  padding-right: 20px;
-}
-@media (max-width: 600px) {
-  .module {
-    font-size: 10px;
-    max-height: 75px; }
-}
-@media (max-width: 1024px) {
-  .grid {
-    margin: 0;
-  }
-  .module {
-    min-width: 60px;
-  }
-}
-
+/* HeroesComponent's private CSS styles */
 .heroes {
   margin: 0 0 2em 0;
   list-style-type: none;
@@ -67,8 +9,8 @@ h4 {
   position: relative;
   cursor: pointer;
   background-color: #EEE;
-  margin: .5em;
-  padding: .3em 0;
+  margin: 1em;
+  padding: 0 0;
   height: 1.6em;
   border-radius: 4px;
 }
@@ -100,7 +42,7 @@ h4 {
   line-height: 1em;
   position: relative;
   left: -1px;
-  top: -4px;
+  top: 0px;
   height: 1.8em;
   min-width: 16px;
   text-align: right;
@@ -128,4 +70,15 @@ button.delete {
   top: -32px;
   background-color: gray !important;
   color: white;
+}
+
+button.h-button {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: left;
+}
+button.h-button.selected {
+  background-color: #97d0ec;
+  color: #ffffff;
 }
