@@ -1,6 +1,18 @@
 <h2>My Heroes</h2>
 
-<ul class="heroes">
+<div *ngIf="isLoading" class="loading-spinner" ></div>
+
+<div *ngIf="!isLoading">
+  <label>Hero name:
+    <input #heroName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(heroName.value); heroName.value=''">
+    add
+  </button>
+</div>
+
+<ul class="heroes" *ngIf="!isLoading">
   <li *ngFor="let hero of heroes">
     <!-- <a routerLink="/hero/{{hero.id}}">
       <span class="badge">{{hero.id}}</span> {{hero.name}}

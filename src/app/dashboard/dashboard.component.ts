@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero } from '../hero';
+import { Hero } from '../x-class/hero';
+import { HeroService } from '../x-services/hero.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,19 +8,20 @@ import { Hero } from '../hero';
   styleUrls: [ './dashboard.component.css' ]
 })
 export class DashboardComponent implements OnInit {
-  heroes: Array<Hero> = [
-    { id: 1, name: 'Mr. Nice' },
-    { id: 2, name: 'Narco' },
-    { id: 3, name: 'Bombasto' },
-    { id: 4, name: 'Celeritas' }
-  ];
+  heroes: Hero[] = [];
+  isLoading = false;
 
-  constructor() { }
+  constructor(private heroService: HeroService) { }
 
   ngOnInit() {
     this.getHeroes();
   }
 
   getHeroes(): void {
+    this.isLoading = true;
+    this.heroService.getHeroes().subscribe(heroes => {
+      this.heroes = heroes.slice(1, 5)
+      this.isLoading = false
+    });
   }
 }
