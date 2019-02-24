@@ -2,7 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Hero } from '../hero';
+import { Hero } from '../x-class/hero';
+import { HeroService }  from '../x-services/hero.service';
 
 @Component({
   selector: 'app-hero',
@@ -12,27 +13,27 @@ import { Hero } from '../hero';
 export class HeroComponent implements OnInit {
   id: Number;
   hero: Hero;
-  heroes: Array<Hero> = [
-    { id: 1, name: 'Mr. Nice' },
-    { id: 2, name: 'Narco' },
-    { id: 3, name: 'Bombasto' },
-    { id: 4, name: 'Celeritas' },
-    { id: 5, name: 'Magneta' },
-    { id: 6, name: 'RubberMan' },
-    { id: 7, name: 'Dynama' },
-    { id: 8, name: 'Dr IQ' },
-    { id: 9, name: 'Magma' },
-    { id: 10, name: 'Tornado' }
-  ];
+  heroes: Hero[] = [];
+  isLoading = false;
 
   constructor(
     private route: ActivatedRoute,
+    private heroService: HeroService,
     private location: Location
   ) {}
 
   ngOnInit(): void {
     this.id = +this.route.snapshot.paramMap.get('id');
-    this.getHero();
+    this.getHeroes();
+  }
+
+  getHeroes(): void {
+    this.isLoading = true;
+    this.heroService.getHeroes().subscribe(heroes => {
+      this.heroes = heroes
+      this.getHero()
+      this.isLoading = false
+    });
   }
 
   getHero(): void {
@@ -44,5 +45,6 @@ export class HeroComponent implements OnInit {
   }
 
   save(): void {
+    this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
   }
 }

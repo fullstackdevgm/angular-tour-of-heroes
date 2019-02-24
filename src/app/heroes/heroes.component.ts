@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Hero } from '../hero';
+import { Hero } from '../x-class/hero';
+import { HeroService } from '../x-services/hero.service';
 
 @Component({
   selector: 'app-heroes',
@@ -8,21 +9,11 @@ import { Hero } from '../hero';
   styleUrls: ['./heroes.component.css']
 })
 export class HeroesComponent implements OnInit {
-  heroes: Array<Hero> = [
-    { id: 1, name: 'Mr. Nice' },
-    { id: 2, name: 'Narco' },
-    { id: 3, name: 'Bombasto' },
-    { id: 4, name: 'Celeritas' },
-    { id: 5, name: 'Magneta' },
-    { id: 6, name: 'RubberMan' },
-    { id: 7, name: 'Dynama' },
-    { id: 8, name: 'Dr IQ' },
-    { id: 9, name: 'Magma' },
-    { id: 10, name: 'Tornado' }
-  ];
+  heroes: Hero[];
   selected: Hero;
+  isLoading = false;
 
-  constructor() { }
+  constructor(private heroService: HeroService) { }
 
   ngOnInit() {
     this.selected = null;
@@ -30,6 +21,11 @@ export class HeroesComponent implements OnInit {
   }
 
   getHeroes(): void {
+    this.isLoading = true;
+    this.heroService.getHeroes().subscribe(heroes => {
+      this.heroes = heroes
+      this.isLoading = false;
+    });
   }
 
   select(event, sid): void {
@@ -38,6 +34,9 @@ export class HeroesComponent implements OnInit {
   }
 
   add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.heroService.addHero({ name } as Hero).subscribe(hero => { this.heroes.push(hero); });
   }
 
   delete(hero: Hero): void {
