@@ -12,6 +12,8 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[];
   selected: Hero;
   isLoading = false;
+  isDashboard: boolean = false;
+  status: boolean;
 
   constructor(private heroService: HeroService) { }
 
@@ -28,9 +30,9 @@ export class HeroesComponent implements OnInit {
     });
   }
 
-  select(event, sid): void {
-    console.log(sid);
-    this.selected = this.heroes.filter(h => { return h.id == sid })[0];
+  select(status: boolean, selected: Hero): void {
+    this.status = status;
+    this.selected = selected;
   }
 
   add(name: string): void {

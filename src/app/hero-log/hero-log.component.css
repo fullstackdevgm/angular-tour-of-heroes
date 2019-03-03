@@ -1,0 +1,5 @@
+/* HeroLog private styles */
+
+ul li:first-child {
+	display: none;
+}

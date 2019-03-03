@@ -17,13 +17,13 @@
     <!-- <a routerLink="/hero/{{hero.id}}">
       <span class="badge">{{hero.id}}</span> {{hero.name}}
     </a> -->
-    <button [ngClass]="{'h-button': true, 'selected': selected != null && selected.id == hero.id}" (click)="select($event, hero.id)">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
-    </button>
+    <list-item [hero]=hero (selected)="select($event, hero)"></list-item>
   </li>
 </ul>
 
-<div *ngIf="selected != null" class="selected_hero">
+<!-- <div *ngIf="selected != null" class="selected_hero">
   <h3>{{selected.name}} is my Hero! </h3>
   <a routerLink="/hero/{{selected.id}}">View Details</a>
-</div>
+</div> -->
+
+<app-hero-log *ngIf="!isLoading" [isDashboard]="isDashboard" [hero]="selected" [status]="status"></app-hero-log>
